@@ -1,0 +1,57 @@
+USE DATABASE MYDB;
+USE SCHEMA SPS;
+CREATE OR REPLACE PROCEDURE VAR1()
+RETURNS FLOAT
+LANGUAGE SQL
+AS
+$$
+DECLARE
+    MY_VAR NUMBER;
+BEGIN
+    RETURN MY_VAR; -- IT GIVES YOU NULL VALUE
+END;
+$$;
+
+CALL VAR1();
+
+CREATE OR REPLACE PROCEDURE VAR2()
+RETURNS FLOAT
+LANGUAGE SQL
+AS
+$$
+DECLARE
+    MY_VAR ;
+BEGIN
+    RETURN MY_VAR;
+END;
+$$;
+--SQL compilation error: error line 3 at position 4 variable 'MY_VAR' must have either a type or an initializer to infer a type from
+
+CREATE OR REPLACE PROCEDURE VAR3()
+RETURNS FLOAT
+LANGUAGE SQL
+AS
+$$
+DECLARE
+    my_var text ;
+BEGIN
+    RETURN MY_VAR;
+END;
+$$;
+
+CALL VAR3();
+--Variables are CASE INSENSITIVE
+
+CREATE OR REPLACE PROCEDURE VAR4()
+RETURNS NUMBER
+LANGUAGE SQL
+AS
+$$
+DECLARE
+    my_var text default 'Avr' ;
+BEGIN
+    RETURN MY_VAR;
+END;
+$$;
+
+CALL VAR4();
