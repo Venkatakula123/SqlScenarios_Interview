@@ -1,0 +1,1 @@
+Select max(sal) from emp where sal < (Select max(sal) from emp);
